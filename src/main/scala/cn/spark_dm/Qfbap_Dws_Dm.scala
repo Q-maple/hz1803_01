@@ -11,19 +11,19 @@ class Qfbap_Dws_Dm {
 
   def dws_Dm(sqlKey:String): Unit = {
 
-    val spark = Spark_Utils.getEnabelHiveSparkSession(SparkSession_msg.SPARK_APPNAME,SparkSession_msg.SPARK_MASTER)
-    val sql = Properties_Load.getResource(sqlKey)
-    if (sql.isEmpty) {
-      LoggerFactory.getLogger("sparksql").debug("sql有问题,请重新编写提交")
-    }else{
-      //执行sql
-      val df: DataFrame = spark.sql(sql)
-      //获取hive表名,需要带上数据库名
-      val hive_tableName = sqlKey
-      //获取mysql参数 --> name,passwd,driver   和url  以及tablename
-      val prop = Mysql_JDBC.getJDBC._1
-      val url = Mysql_JDBC.getJDBC._2
-      val mysql_tableName = sqlKey.split("\\.")(1)
+      val spark = Spark_Utils.getEnabelHiveSparkSession(SparkSession_msg.SPARK_APPNAME,SparkSession_msg.SPARK_MASTER)
+      val sql = Properties_Load.getResource(sqlKey)
+      if (sql.isEmpty) {
+        LoggerFactory.getLogger("sparksql").debug("sql有问题,请重新编写提交")
+      }else{
+        //执行sql
+        val df: DataFrame = spark.sql(sql)
+        //获取hive表名,需要带上数据库名
+        val hive_tableName = sqlKey
+        //获取mysql参数 --> name,passwd,driver   和url  以及tablename
+        val prop = Mysql_JDBC.getJDBC._1
+        val url = Mysql_JDBC.getJDBC._2
+        val mysql_tableName = sqlKey.split("\\.")(1)
 //      df.write.mode(SaveMode.Overwrite).jdbc(url,mysql_tableName,prop)
 
       df.write.mode(SaveMode.Append).jdbc(url,mysql_tableName,prop)

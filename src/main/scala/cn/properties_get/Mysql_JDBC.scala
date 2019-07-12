@@ -20,7 +20,4 @@ object Mysql_JDBC {
 
     (prop,url)
   }
-
-
-
 }
