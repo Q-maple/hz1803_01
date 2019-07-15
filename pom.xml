@@ -67,7 +67,6 @@
             <artifactId>kafka-clients</artifactId>
             <version>${kafka.version}</version>
         </dependency>
-
         <!--连接 Redis 需要的包-->
         <dependency>
             <groupId>redis.clients</groupId>

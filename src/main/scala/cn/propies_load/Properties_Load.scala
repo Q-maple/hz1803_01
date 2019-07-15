@@ -9,11 +9,13 @@ object Properties_Load {
   val prop = new Properties()
   try {
     //将配置文件加载进来
-    val dws_dm = Properties_Load.getClass.getClassLoader.getResourceAsStream("dws_dm.properties")
+    val dws_dm1 = Properties_Load.getClass.getClassLoader.getResourceAsStream("dws_dm.properties")
+    val dws_dm2 = Properties_Load.getClass.getClassLoader.getResourceAsStream("dm.properties")
     val mysql_jdbc = Properties_Load.getClass.getClassLoader.getResourceAsStream("mysql_jdbc.properties")
 
     //将加载的配置文件转载进peoperties对象中
-    prop.load(dws_dm)
+    prop.load(dws_dm1)
+    prop.load(dws_dm2)
     prop.load(mysql_jdbc)
   }catch {
     case e:Exception => print(e.getStackTrace)
